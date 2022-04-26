@@ -3,7 +3,7 @@
 ###### Powered By Renan Pinto
 
 <p align="center">
- <a href="#-about-the-project">About</a> •
+ <a href="#-about">About</a> •
  <a href="#-funcionalities">Funcionalities</a> •
  <a href="#-how-to-run-the-project">How to run the project</a> •
  <a href="#-technologies">Technologies</a> 
@@ -89,10 +89,11 @@ The following tools were used to build the project:
 - **[Swagger](https://swagger.io/docs/specification/about/)**
 
 ## 🛠 Documentation
-- Swagger
+### Swagger
 ![Captura de tela de 2022-04-26 18-14-11](https://user-images.githubusercontent.com/31354349/165393625-153c334a-8258-42c4-8a3d-fbb8b3ac02b6.png)
 
-- H2 database
+
+### H2 database
 ![Captura de tela de 2022-04-26 18-13-54](https://user-images.githubusercontent.com/31354349/165393679-a1a7dee9-9c4c-495a-9fd4-e892bfe09878.png)
 
 
