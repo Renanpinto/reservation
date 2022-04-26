@@ -1,11 +1,11 @@
 package com.department.hotel.reservation.gateways.http;
 
 import com.department.hotel.reservation.domains.Reservation;
-import com.department.hotel.reservation.usecases.ReservationCRUD;
+import com.department.hotel.reservation.gateways.http.json.ReservationJson;
+import com.department.hotel.reservation.usecases.ReservationCrud;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import java.util.List;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,47 +23,41 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/reservations")
 public class ReservationController {
 
-  private final ReservationCRUD crud;
+  private final ReservationCrud crud;
 
   @GetMapping
   @ApiOperation(
       value = "Find all Reservations")
-  @ApiResponses(
-      value = {
-          @ApiResponse(code = 200, message = "OK"),
-          @ApiResponse(code = 500, message = "Internal Server Error")
-      })
   @ResponseStatus(value = HttpStatus.OK)
   public List<Reservation> findAll() {
     return crud.listReservations();
   }
 
+  @GetMapping("/{id}")
+  @ApiOperation(
+      value = "Find reservation by Id")
+  @ResponseStatus(value = HttpStatus.OK)
+  public Reservation findById(@PathVariable String id) {
+    return crud.listById(id);
+  }
+
   @PostMapping
   @ApiOperation(
       value = "Creates a new reservation")
-  @ApiResponses(
-      value = {
-          @ApiResponse(code = 200, message = "OK"),
-          @ApiResponse(code = 500, message = "Internal Server Error")
-      })
-  @ResponseStatus(value = HttpStatus.OK)
+  @ResponseStatus(value = HttpStatus.CREATED)
   public Reservation create(
-      @RequestBody Reservation reservation) {
-    return crud.create(reservation);
+      @RequestBody @Valid ReservationJson reservationRequest) {
+    return crud.create(reservationRequest.toDomain());
   }
 
   @PutMapping(value = "/{id}")
   @ApiOperation(
       value = "Update a reservation")
-  @ApiResponses(
-      value = {
-          @ApiResponse(code = 200, message = "OK"),
-          @ApiResponse(code = 500, message = "Internal Server Error")
-      })
   @ResponseStatus(value = HttpStatus.OK)
   public Reservation update(
       @PathVariable String id,
-      @RequestBody Reservation reservation) {
+      @RequestBody @Valid ReservationJson reservationRequest) {
+    var reservation = reservationRequest.toDomain();
     reservation.setId(id);
     return crud.update(reservation);
   }

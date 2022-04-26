@@ -1,6 +1,7 @@
 package com.department.hotel.reservation.usecases;
 
 import com.department.hotel.reservation.domains.Reservation;
+import com.department.hotel.reservation.exceptions.NotFoundException;
 import com.department.hotel.reservation.gateways.ReservationGateway;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -8,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ReservationCRUD {
+public class ReservationCrud {
 
   private final ReservationGateway gateway;
 
   public List<Reservation> listReservations() {
     return gateway.findAll();
+  }
+
+  public Reservation listById(String id) {
+    return findById(id);
   }
 
   public Reservation create(Reservation reservation) {
@@ -31,7 +36,7 @@ public class ReservationCRUD {
   }
 
   private Reservation findById(String id) {
-    return gateway.findById(id).orElse(null);
+    return gateway.findById(id).orElseThrow(() -> new NotFoundException("Reservation not found"));
   }
 
 }
