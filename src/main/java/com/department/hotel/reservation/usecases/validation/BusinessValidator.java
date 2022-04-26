@@ -37,7 +37,7 @@ public class BusinessValidator {
     }
 
     if (reservation.getStartDate().isAfter(LocalDate.now().plusDays(30))) {
-      throw new BusinessException("The stay can’t reserved more than 30 days in advance");
+      throw new BusinessException("The stay can’t be reserved more than 30 days in advance");
     }
   }
 

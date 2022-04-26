@@ -5,9 +5,11 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDate;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class ReservationJson {
 
   @ApiModelProperty(value = "Attribute username", example = "john", required = true)
