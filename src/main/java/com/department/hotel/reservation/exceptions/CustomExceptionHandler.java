@@ -21,6 +21,13 @@ public class CustomExceptionHandler {
     return new ErrorResponseJson(NOT_FOUND.value(), NOT_FOUND.name(), exception.getMessage());
   }
 
+  @ExceptionHandler(BusinessException.class)
+  @ResponseStatus(BAD_REQUEST)
+  public ErrorResponseJson handleBusinessException(BusinessException exception) {
+
+    return new ErrorResponseJson(BAD_REQUEST.value(), BAD_REQUEST.name(), exception.getMessage());
+  }
+
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(BAD_REQUEST)
   public ErrorResponseJson handleValidationError(MethodArgumentNotValidException exception) {

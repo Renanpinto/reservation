@@ -2,6 +2,7 @@ package com.department.hotel.reservation.gateways.db;
 
 import com.department.hotel.reservation.domains.Reservation;
 import com.department.hotel.reservation.gateways.ReservationGateway;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,11 @@ public class ReservationGatewayImpl implements ReservationGateway {
   @Override
   public Optional<Reservation> findById(String id) {
     return repository.findById(id);
+  }
+
+  @Override
+  public List<Reservation> findByRange(LocalDate startDate, LocalDate endDate) {
+    return repository.findByRange(startDate, endDate);
   }
 
   @Override

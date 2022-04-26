@@ -26,6 +26,8 @@ public class Reservation {
   private String id;
   @Column(name = "username")
   private String username;
+  @Column(name = "room")
+  private int room = 1;
   @Column(name = "email")
   private String email;
   @Column(name = "start_date")
