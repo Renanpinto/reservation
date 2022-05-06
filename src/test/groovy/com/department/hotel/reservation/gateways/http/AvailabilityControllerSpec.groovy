@@ -22,7 +22,14 @@ class AvailabilityControllerSpec extends Specification {
 
     def "when get is performed then the response has status 200 and content is empty"() {
         expect: "Status is 200 and the response is array of reservation"
-        mvc.perform(MockMvcRequestBuilders.get("/api/v1/availability/{startDate}/{endDate}", LocalDate.now().plusDays(1), LocalDate.now().plusDays(2)))
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/availability/{startDate}/{endDate}", LocalDate.of(2022, 05, 06), LocalDate.of(2022, 05, 07)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn()
+    }
+
+    def "when get is performed then the response has status 200 and content is not empty"() {
+        expect: "Status is 200 and the response is array of reservation"
+        mvc.perform(MockMvcRequestBuilders.get("/api/v1/availability/{startDate}/{endDate}", LocalDate.of(2022, 04, 01), LocalDate.of(2022, 06, 01)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn()
     }
